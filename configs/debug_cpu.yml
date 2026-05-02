@@ -1,0 +1,40 @@
+# Debug configuration for a fast smoke test on CPU
+
+data:
+  images_dir: "data/Flickr8k_Dataset/"
+  captions_train: "data/Flickr8k_text/train.csv"
+  captions_val: "data/Flickr8k_text/val.csv"
+  vocab_path: "data/vocab.json"
+  img_size: 299
+
+model:
+  embed_dim: 300
+  hidden_dim: 512
+  num_layers: 1
+  dropout: 0.3
+  train_cnn: false
+  cnn_lr_factor: 0.1
+
+train:
+  epochs: 1
+  batch_size: 8
+  learning_rate: 0.001
+  label_smoothing: 0.1
+  lr_factor: 0.5
+  lr_patience: 1
+  ckpt_dir: "checkpoints/debug_cpu/"
+  log_dir: "runs/tensorboard/debug_cpu/"
+  num_workers: 0
+  log_interval: 10
+  use_scheduled_sampling: false
+  teacher_forcing_start: 1.0
+  teacher_forcing_end: 1.0
+
+seed: 42
+device: "cpu"
+
+eval:
+  captions_json: "data/Flickr8k_text/test_captions.json"
+  output_json: "results/debug_cpu_predictions.json"
+  max_len: 20
+  top_k: 1

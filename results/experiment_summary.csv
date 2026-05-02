@@ -1,0 +1,5 @@
+experiment,config,epochs,trainable_parameters,best_val_loss,final_train_loss,final_val_loss,BLEU1,BLEU2,BLEU3,BLEU4,notes
+baseline_cpu,configs/baseline_cpu.yml,5,4709177,4.1927,4.8016,4.2332,0.2553061498142745,0.15559895805143154,0.09284631339529785,0.04720477174733463,Reference baseline with scheduled sampling and label smoothing
+ablation_no_ss_cpu,configs/ablation_no_scheduled_sampling_cpu.yml,5,4709177,4.0106,3.5373,4.0234,0.2231625318803617,0.12420029271043319,0.07169147339611527,0.03955440245981607,Removing scheduled sampling lowers BLEU despite lower training loss
+ablation_no_ls_cpu,configs/ablation_no_label_smoothing_cpu.yml,5,4709177,3.5029,4.0860,3.5738,0.24038337002978888,0.14345701761258997,0.08085658255542255,0.03938569761414783,Removing label smoothing reduces BLEU compared with baseline
+ablation_finetune_cpu,configs/ablation_finetune_cpu.yml,5,4709177,3.6614,4.7512,4.2861,0.33005756798764135,0.2022157953795748,0.11891645415851809,0.0649177309692631,Best BLEU results obtained with CNN fine-tuning
