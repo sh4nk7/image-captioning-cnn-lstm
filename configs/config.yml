@@ -1,0 +1,61 @@
+# ============================================================
+# Configuration file for CNN–LSTM Image Captioning (Flickr8k)
+# Author: Giuseppe Dimonte
+# University of Parma – MSc in Computer Engineering (AI)
+# ============================================================
+
+# ------------------------------------------------------------
+#  DATA SETTINGS
+# ------------------------------------------------------------
+data:
+  images_dir: "data/Flickr8k_Dataset/"           # Directory containing all Flickr8k images (.jpg)
+  captions_train: "data/Flickr8k_text/train.csv" # CSV: image_name,caption for training
+  captions_val: "data/Flickr8k_text/val.csv"     # CSV: image_name,caption for validation
+  vocab_path: "data/vocab.json"                  # JSON vocabulary file (built with vocab_builder.py)
+  img_size: 299                                  # Image input size (InceptionV3 default)
+
+# ------------------------------------------------------------
+#  MODEL SETTINGS
+# ------------------------------------------------------------
+model:
+  embed_dim: 300          # Word embedding dimension
+  hidden_dim: 512         # LSTM hidden state dimension
+  num_layers: 1           # Number of LSTM layers
+  dropout: 0.3            # Dropout for LSTM regularization
+  train_cnn: true         # Whether to fine-tune CNN layers
+  cnn_lr_factor: 0.1      # Learning rate multiplier for CNN parameters
+
+# ------------------------------------------------------------
+#  TRAINING SETTINGS
+# ------------------------------------------------------------
+train:
+  epochs: 25                      # Total number of training epochs
+  batch_size: 64                  # Batch size for DataLoader
+  learning_rate: 0.001            # Base learning rate for Adam optimizer
+  label_smoothing: 0.1            # Label smoothing factor in loss
+  lr_factor: 0.5                  # LR scheduler reduction factor
+  lr_patience: 2                  # LR scheduler patience in epochs
+  ckpt_dir: "checkpoints/"        # Directory to save model checkpoints
+  log_dir: "runs/tensorboard/"    # Directory for TensorBoard logs
+  num_workers: 4                  # Number of DataLoader workers
+  log_interval: 50                # Print progress every N steps
+
+  # Scheduled Sampling (teacher forcing decay)
+  use_scheduled_sampling: true
+  teacher_forcing_start: 0.7
+  teacher_forcing_end: 0.3
+
+# ------------------------------------------------------------
+#  EXPERIMENTAL SETTINGS
+# ------------------------------------------------------------
+seed: 42                  # Random seed for reproducibility
+device: "cuda"            # Default device ("cuda" or "cpu")
+
+# ------------------------------------------------------------
+#  EVALUATION SETTINGS
+# ------------------------------------------------------------
+eval:
+  captions_json: "data/Flickr8k_text/test_captions.json"  # Reference captions (5 per image)
+  output_json: "results/predictions.json"                 # Path to save generated captions
+  max_len: 20                                             # Max caption length during evaluation
+  top_k: 1                                                # Greedy decoding (1) or top-k sampling (>1)

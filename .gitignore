@@ -1,0 +1,22 @@
+# Large dataset artifacts
+data/Flickr8k_Dataset/
+data/Flickr8k_Dataset.zip
+data/data/
+
+# Model weights are too large for standard GitHub uploads
+checkpoints/
+
+# Generated training artifacts
+runs/
+logs/
+figures/
+
+# Python and notebook artifacts
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Local editor and OS files
+.vscode/
+.DS_Store
+Thumbs.db

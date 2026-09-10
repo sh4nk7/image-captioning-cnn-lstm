@@ -1,0 +1,18 @@
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
+\contentsline {section}{\numberline {1}Introduzione}{2}{section.1}%
+\contentsline {section}{\numberline {2}Traccia dell'assegnamento}{2}{section.2}%
+\contentsline {section}{\numberline {3}Dataset e preprocessing}{2}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Dataset Flickr8k}{2}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Pulizia del testo}{3}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Architettura del modello}{3}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Encoder}{3}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Decoder}{3}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Tecniche di training}{4}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Dettagli implementativi}{4}{section.5}%
+\contentsline {section}{\numberline {6}Setup sperimentale}{5}{section.6}%
+\contentsline {section}{\numberline {7}Risultati quantitativi}{5}{section.7}%
+\contentsline {section}{\numberline {8}Discussione dei risultati}{5}{section.8}%
+\contentsline {section}{\numberline {9}Analisi qualitativa}{6}{section.9}%
+\contentsline {section}{\numberline {10}Limiti del progetto}{7}{section.10}%
+\contentsline {section}{\numberline {11}Conclusioni}{8}{section.11}%

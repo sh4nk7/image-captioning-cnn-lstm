@@ -1,0 +1,18 @@
+Path: docs/build_report_commands.txt
+
+Commands to build the report from the project root directory.
+
+1. Move into the docs folder:
+pdflatex is usually run from the folder that contains the .tex file.
+
+2. Basic compilation command:
+
+pdflatex -output-directory=docs docs/report_skeleton.tex
+
+3. If cross-references require a second pass:
+
+pdflatex -output-directory=docs docs/report_skeleton.tex
+
+4. If you want to extract the resulting PDF location:
+
+docs/report_skeleton.pdf

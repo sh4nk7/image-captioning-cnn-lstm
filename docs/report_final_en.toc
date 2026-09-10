@@ -1,0 +1,17 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {section}{\numberline {2}Assignment Requirements}{2}{section.2}%
+\contentsline {section}{\numberline {3}Dataset and Preprocessing}{2}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Flickr8k}{2}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Caption Cleaning}{3}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Model Architecture}{3}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Encoder}{3}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Decoder}{3}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Training Features}{4}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Implementation Details}{4}{section.5}%
+\contentsline {section}{\numberline {6}Experimental Setup}{5}{section.6}%
+\contentsline {section}{\numberline {7}Quantitative Results}{5}{section.7}%
+\contentsline {section}{\numberline {8}Discussion}{5}{section.8}%
+\contentsline {section}{\numberline {9}Qualitative Analysis}{6}{section.9}%
+\contentsline {section}{\numberline {10}Limitations}{7}{section.10}%
+\contentsline {section}{\numberline {11}Conclusion}{7}{section.11}%

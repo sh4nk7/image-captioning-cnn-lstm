@@ -1,0 +1,44 @@
+% Path: docs/qualitative_section_template.tex
+% Replace the placeholder filenames below with the actual figure files
+% you want to discuss in the final report.
+
+\section{Qualitative Analysis}
+
+This section should compare representative outputs from the baseline model
+and from the best-performing fine-tuned model, and should also include at
+least one failure case.
+
+\begin{figure}[H]
+    \centering
+    % Example:
+    % \includegraphics[width=0.75\textwidth]{../figures/baseline_cpu/vis_X_filename.png}
+    \fbox{\parbox[c][5cm][c]{0.75\textwidth}{\centering Insert baseline qualitative figure here}}
+    \caption{Qualitative example from the baseline model. Replace this placeholder with a real figure from \texttt{figures/baseline\_cpu/}.}
+    \label{fig:baseline_qualitative}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    % Example:
+    % \includegraphics[width=0.75\textwidth]{../figures/ablation_finetune_cpu/vis_X_filename.png}
+    \fbox{\parbox[c][5cm][c]{0.75\textwidth}{\centering Insert fine-tuned qualitative figure here}}
+    \caption{Qualitative example from the fine-tuned model. Replace this placeholder with a real figure from \texttt{figures/ablation\_finetune\_cpu/}.}
+    \label{fig:finetune_qualitative}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    % Use a figure that shows a clear failure case, such as a generic caption,
+    % an incorrect object, or an incomplete sentence.
+    \fbox{\parbox[c][5cm][c]{0.75\textwidth}{\centering Insert failure case here}}
+    \caption{Failure case used to discuss model limitations. Replace this placeholder with a real figure selected from the generated outputs.}
+    \label{fig:failure_case}
+\end{figure}
+
+\noindent Suggested discussion points:
+\begin{itemize}
+    \item whether the generated caption identifies the main object correctly;
+    \item whether the action or scene context is captured;
+    \item whether the caption is generic, incomplete, or incorrect;
+    \item whether the fine-tuned model is more specific than the baseline.
+\end{itemize}

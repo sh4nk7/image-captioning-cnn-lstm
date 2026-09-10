@@ -1,0 +1,792 @@
+PROJECT STATUS MASTER
+CNN-LSTM IMAGE CAPTIONING ON FLICKR8K
+
+Author / Student: Giuseppe Dimonte
+Course: Deep Learning and Generative Models
+University: University of Parma
+Assignment: Project #27
+
+=====================================================================
+1. PURPOSE OF THIS FILE
+=====================================================================
+
+This file is a complete textual map of the project.
+
+It is meant to help:
+- the student keep track of the entire work
+- the supervisor/professor understand what has been implemented
+- a non-programmer understand the structure and progress of the project
+- the final whitepaper/report be written on verified facts
+
+This file documents:
+- the original assignment
+- the goal of the project
+- the structure of the repository
+- what each module does
+- what has already been implemented
+- what has been corrected during revision
+- what still needs to be executed and measured
+- what remains to be completed before final delivery
+
+=====================================================================
+2. ORIGINAL ASSIGNMENT
+=====================================================================
+
+Assignment: Deep Learning and Generative Models - Project assignment #27
+
+Objective:
+- Given an input image, generate an image caption that describes its content.
+
+Dataset:
+- Flickr8k
+- Source indicated by assignment:
+  https://github.com/goodwillyoga/Flickr8k_dataset
+
+Required network model:
+- CNN-LSTM
+
+Detailed assignment requirements:
+- Build a CNN-LSTM architecture for image captioning
+- Treat the task as image-to-sequence generation
+- Extract visual features from an image using a CNN
+- Pair the extracted image features with tokenized text descriptions during training
+- Use an output decoder/MLP from LSTM hidden states to predict words
+- Clean the text descriptions
+- Convert words to lowercase
+- Remove numbers
+- Remove punctuation
+- Remove single-letter words
+- Save the processed dictionary/vocabulary in a file
+- Use an encoding suitable for LSTM input
+
+Interpretation of the assignment:
+- The CNN is responsible for visual understanding
+- The LSTM is responsible for language generation
+- The final system must work end-to-end:
+  image -> visual features -> word sequence -> caption
+
+=====================================================================
+3. HIGH-LEVEL PROJECT DESCRIPTION
+=====================================================================
+
+This repository implements an image captioning pipeline based on:
+- InceptionV3 as image encoder
+- LSTM as text decoder
+- Flickr8k dataset for supervised learning
+- BLEU metrics for evaluation
+- optional Streamlit interface for interactive use
+
+The intended complete flow is:
+
+1. Prepare the dataset and captions
+2. Clean the text and build a vocabulary
+3. Build train/validation/test files
+4. Train the CNN-LSTM model
+5. Save checkpoints and TensorBoard logs
+6. Evaluate the trained model with BLEU metrics
+7. Generate qualitative visual examples
+8. Optionally test the model in a Streamlit app
+
+=====================================================================
+4. REPOSITORY STRUCTURE
+=====================================================================
+
+Root folders and files currently relevant:
+
+- src/
+  Main source code for data preparation, dataset loading, model, training,
+  evaluation, visualization, and UI.
+
+- configs/
+  Configuration files for default, debug, baseline, and ablation experiments.
+
+- data/
+  Flickr8k dataset files, caption files, generated vocabulary, processed CSVs,
+  and generated JSON references.
+
+- checkpoints/
+  Stores model checkpoints produced by training.
+
+- figures/
+  Stores saved qualitative visualizations.
+
+- results/
+  Stores prediction files and evaluation outputs.
+
+- runs/
+  Stores TensorBoard logs.
+
+- README.md
+  Updated project documentation aligned with the actual repository flow.
+
+- requirements.txt
+  Dependency list.
+
+- DELIVERY_CHECKLIST.md
+  Practical checklist for exam/delivery.
+
+- LAB_PROTOCOL.md
+  Rigid experimental protocol for professional lab-style execution.
+
+- LAB_LOG.md
+  Log template to record every experiment in chronological order.
+
+- PROJECT_STATUS_MASTER.txt
+  This file.
+
+=====================================================================
+5. SOURCE FILE MAP
+=====================================================================
+
+5.1 src/vocab_builder.py
+
+Purpose:
+- Clean Flickr8k captions
+- Parse the original caption file format correctly
+- Build the vocabulary
+- Save the vocabulary to JSON
+- Export processed train/validation CSV files
+- Export test reference captions JSON
+
+Inputs:
+- Flickr8k caption file:
+  data/Flickr8k_text/Flickr8k.token.txt
+- Flickr8k split files:
+  Flickr_8k.trainImages.txt
+  Flickr_8k.devImages.txt
+  Flickr_8k.testImages.txt
+
+Outputs:
+- data/vocab.json
+- data/Flickr8k_text/train.csv
+- data/Flickr8k_text/val.csv
+- data/Flickr8k_text/test_captions.json
+
+Why this file matters:
+- It makes the preprocessing reproducible
+- It guarantees the vocabulary is built from the real Flickr8k format
+- It produces the exact files expected by training and evaluation
+
+
+5.2 src/prepare_data.py
+
+Purpose:
+- Convenience wrapper around vocabulary creation and split export
+
+Why this file matters:
+- Reduces human error
+- Allows a single reproducible command for all data preparation
+
+Typical command:
+- python src/prepare_data.py
+
+
+5.3 src/dataset.py
+
+Purpose:
+- Load images and captions for training/validation
+- Convert cleaned captions into token IDs
+- Apply image transforms
+- Pad variable-length sequences through a custom collate function
+
+Inputs:
+- processed CSV files
+- vocabulary JSON
+- image directory
+
+Outputs:
+- batches of images and token sequences for PyTorch training
+
+
+5.4 src/model.py
+
+Purpose:
+- Define the neural architecture
+
+Components:
+- EncoderCNN:
+  uses pretrained InceptionV3 and projects visual features to embedding space
+- DecoderLSTM:
+  receives image-conditioned input and predicts word tokens step by step
+- CNNtoLSTM:
+  wraps encoder + decoder in a single model
+
+Important implementation note:
+- During revision, the encoder was corrected so that CNN fine-tuning can
+  actually happen when enabled, instead of being blocked by no_grad.
+
+
+5.5 src/train.py
+
+Purpose:
+- Train the CNN-LSTM captioning model
+
+Features included:
+- reproducibility seed
+- DataLoader setup
+- scheduled sampling support
+- cross-entropy loss with label smoothing
+- gradient clipping
+- validation loss computation
+- checkpoint saving
+- TensorBoard logging
+- resume from checkpoint support
+
+Important implementation note:
+- During revision, the training loss alignment was corrected so that the
+  model learns next-token prediction properly instead of incorrectly scoring
+  the initial special timestep associated with image features.
+
+
+5.6 src/eval.py
+
+Purpose:
+- Load a trained checkpoint
+- Generate captions for test images
+- Compare predictions against 5 reference captions per image
+- Compute BLEU-1, BLEU-2, BLEU-3, BLEU-4
+- Save predictions and metric results
+
+Why this file matters:
+- It provides the quantitative evidence required for an academic project
+
+
+5.7 src/visualize.py
+
+Purpose:
+- Generate qualitative examples by saving images with predicted and reference captions
+
+Why this file matters:
+- It supports discussion and qualitative error analysis
+
+
+5.8 src/ui_streamlit.py
+
+Purpose:
+- Provide a small interactive interface for testing the model on uploaded images
+
+Why this file matters:
+- Useful for demonstration during oral discussion
+- Not required for core assignment correctness, but valuable as demo material
+
+
+5.9 src/utils.py
+
+Purpose:
+- Contains helper functions such as decoding tokens, config I/O, JSON utilities, seed setup
+
+Current role:
+- Supportive, but not central to the critical training/evaluation flow
+
+=====================================================================
+6. CONFIGURATION FILE MAP
+=====================================================================
+
+6.1 configs/config.yml
+
+Purpose:
+- Main/default project configuration
+
+Current role:
+- General reference config
+- Can be used for fuller training runs
+
+
+6.2 configs/debug_cpu.yml
+
+Purpose:
+- Very fast smoke test
+
+Goal:
+- Verify pipeline correctness
+- Verify training loop starts
+- Verify checkpoint creation
+
+
+6.3 configs/baseline_cpu.yml
+
+Purpose:
+- Main controlled CPU baseline experiment
+
+Goal:
+- Produce a measurable, documentable baseline under limited compute
+
+
+6.4 configs/ablation_no_scheduled_sampling_cpu.yml
+
+Purpose:
+- Measure the effect of disabling scheduled sampling
+
+
+6.5 configs/ablation_no_label_smoothing_cpu.yml
+
+Purpose:
+- Measure the effect of removing label smoothing
+
+
+6.6 configs/ablation_finetune_cpu.yml
+
+Purpose:
+- Measure the runtime/quality trade-off of enabling CNN fine-tuning on CPU
+
+=====================================================================
+7. DATA FILE MAP
+=====================================================================
+
+Original dataset files already present:
+- data/Flickr8k_Dataset/
+  image files
+- data/Flickr8k_text/Flickr8k.token.txt
+- data/Flickr8k_text/Flickr_8k.trainImages.txt
+- data/Flickr8k_text/Flickr_8k.devImages.txt
+- data/Flickr8k_text/Flickr_8k.testImages.txt
+
+Generated files already produced:
+- data/vocab.json
+- data/Flickr8k_text/train.csv
+- data/Flickr8k_text/val.csv
+- data/Flickr8k_text/test_captions.json
+
+Observed generated dataset sizes:
+- training rows: 30000
+- validation rows: 5000
+- test images: 1000
+- reference captions per test image: 5
+- vocabulary size after revision: 2985 tokens
+
+=====================================================================
+8. MAJOR PROBLEMS IDENTIFIED DURING ANALYSIS
+=====================================================================
+
+Before revision, the repository had several critical issues.
+
+Problem 1:
+- README and code referenced files that did not exist
+
+Examples:
+- requirements.txt missing
+- train.csv missing
+- val.csv missing
+- test_captions.json missing
+- config.yaml referenced even though config.yml existed
+
+Impact:
+- The repository was not reproducible end-to-end
+
+
+Problem 2:
+- Vocabulary builder parsed captions incorrectly
+
+Cause:
+- The original code split lines on commas, but Flickr8k captions are tab-separated
+
+Impact:
+- Vocabulary generation was not truly reproducible from source data
+- Large parts of the dataset could be skipped or parsed incorrectly
+
+
+Problem 3:
+- CNN fine-tuning was effectively disabled even when configured as enabled
+
+Cause:
+- Encoder forward path used no_grad and forced evaluation behavior
+
+Impact:
+- Claims about fine-tuning were not aligned with actual computation
+
+
+Problem 4:
+- Training loss alignment was wrong
+
+Cause:
+- Decoder outputs and target tokens were not shifted correctly
+
+Impact:
+- The model could be optimized against misaligned targets
+
+
+Problem 5:
+- Evaluation/UI used default paths or assumptions inconsistent with actual files
+
+Impact:
+- Evaluation and demo were harder to reproduce reliably
+
+
+Problem 6:
+- Scheduler compatibility issue with local runtime
+
+Observed runtime error:
+- ReduceLROnPlateau received an unexpected verbose argument
+
+Impact:
+- Training crashed at runtime before starting real optimization
+
+=====================================================================
+9. WHAT HAS BEEN CORRECTED
+=====================================================================
+
+The following corrections have already been implemented.
+
+Correction 1:
+- requirements.txt created
+
+Result:
+- The environment now has an explicit dependency file
+
+
+Correction 2:
+- README rewritten to reflect the actual current workflow
+
+Result:
+- Documentation now matches real files and commands
+
+
+Correction 3:
+- prepare_data.py created
+
+Result:
+- Data preparation can be reproduced with a single command
+
+
+Correction 4:
+- vocab_builder.py rewritten
+
+Result:
+- Correct Flickr8k parsing
+- Correct cleaning logic
+- Correct vocabulary generation
+- Correct split export
+
+
+Correction 5:
+- train.csv, val.csv, test_captions.json generated
+
+Result:
+- Training and evaluation now have the required input artifacts
+
+
+Correction 6:
+- model.py revised
+
+Result:
+- CNN fine-tuning support is now real when enabled
+
+
+Correction 7:
+- train.py revised
+
+Result:
+- Correct config path
+- Correct next-token loss alignment
+- Working checkpoint logic
+- Scheduler compatibility fix applied
+
+
+Correction 8:
+- eval.py, visualize.py, ui_streamlit.py revised
+
+Result:
+- Better consistency with checkpoints and actual paths
+
+
+Correction 9:
+- Professional lab protocol documents added
+
+Files:
+- LAB_PROTOCOL.md
+- LAB_LOG.md
+- DELIVERY_CHECKLIST.md
+
+Result:
+- The project can now be executed and documented like a proper lab study
+
+=====================================================================
+10. COMMANDS ALREADY EXECUTED
+=====================================================================
+
+The following relevant actions have already been performed during this revision phase.
+
+1. Repository inspection
+- folder structure inspected
+- source files read
+- config and README checked
+- dataset presence verified
+- checkpoint folder inspected
+
+2. PDF/documentation inspection
+- project PDF text extracted and compared against implementation
+
+3. Data preparation execution
+- python src/prepare_data.py equivalent flow executed
+- produced:
+  - vocab.json
+  - train.csv
+  - val.csv
+  - test_captions.json
+
+4. Syntax verification
+- Python modules compiled successfully with py_compile in the working flow
+
+5. First real training attempt
+- command launched:
+  python src/train.py --config configs/config.yml
+
+Observed output:
+- device detected: cpu
+- trainable parameters printed: 29,821,441
+- runtime crash due to ReduceLROnPlateau verbose argument
+
+Action taken:
+- train.py patched to remove the incompatible verbose argument
+
+6. Training interrupted intentionally
+- training was manually stopped in order to switch from ad hoc execution
+  to a rigid lab-style protocol
+
+=====================================================================
+11. CURRENT PROJECT STATUS
+=====================================================================
+
+Status summary:
+
+Code status:
+- major structural issues corrected
+- repository significantly more coherent than initial state
+- lab protocol set up
+
+Data status:
+- prepared files generated successfully
+- dataset splits and reference JSON ready
+
+Training status:
+- launch path corrected
+- scheduler bug corrected
+- no completed controlled experiment yet
+
+Evaluation status:
+- evaluation code prepared
+- no final BLEU results measured yet under the new protocol
+
+Visualization status:
+- visualization code prepared
+- no new qualitative figures generated yet under the new protocol
+
+Documentation status:
+- operational documentation improved
+- final academic whitepaper not written yet
+
+Overall status:
+- infrastructure ready
+- experimental campaign not completed yet
+
+=====================================================================
+12. WHAT STILL NEEDS TO BE DONE TO FINISH THE PROJECT
+=====================================================================
+
+The project is not finished yet. The main remaining work is experimental.
+
+Remaining task 1:
+- Run the debug CPU experiment
+
+Purpose:
+- confirm that the revised training pipeline starts and produces checkpoints
+
+Config:
+- configs/debug_cpu.yml
+
+Expected outcome:
+- successful 1-epoch smoke test
+- debug checkpoint saved
+
+
+Remaining task 2:
+- Run the baseline CPU experiment
+
+Purpose:
+- produce the main controlled baseline
+
+Config:
+- configs/baseline_cpu.yml
+
+Expected outcome:
+- baseline training losses
+- validation losses
+- total runtime
+- baseline checkpoint
+
+
+Remaining task 3:
+- Evaluate the baseline checkpoint
+
+Purpose:
+- obtain first real BLEU metrics
+
+Expected outcome:
+- BLEU-1, BLEU-2, BLEU-3, BLEU-4
+- saved predictions JSON
+
+
+Remaining task 4:
+- Run the ablation experiments
+
+Experiments planned:
+- no scheduled sampling
+- no label smoothing
+- fine-tuning enabled
+
+Purpose:
+- compare the contribution of key training choices
+
+
+Remaining task 5:
+- Evaluate each ablation checkpoint
+
+Purpose:
+- build a comparative results table
+
+
+Remaining task 6:
+- Generate qualitative examples
+
+Purpose:
+- show real predictions visually
+- support discussion of strengths and failure cases
+
+
+Remaining task 7:
+- Fill LAB_LOG.md during every run
+
+Purpose:
+- preserve a chronological, professional execution history
+
+
+Remaining task 8:
+- Record runtime characteristics of the student machine
+
+Purpose:
+- document CPU-only training cost
+- estimate per-epoch runtime
+- justify practical experimental choices
+
+
+Remaining task 9:
+- Map the project in an accessible way for non-programmers
+
+Purpose:
+- make the final documentation understandable to any academic reader
+
+
+Remaining task 10:
+- Write the final whitepaper/report
+
+This must include:
+- project objective
+- assignment context
+- dataset
+- preprocessing
+- model
+- training setup
+- experiments
+- metrics
+- qualitative analysis
+- limitations
+- future work
+- reproducibility notes
+
+=====================================================================
+13. PROFESSIONAL LAB EXECUTION STRATEGY
+=====================================================================
+
+From this point onward, the project should be executed under a rigid protocol.
+
+Recommended order:
+
+Step 1:
+- Activate the correct conda environment
+
+Step 2:
+- Verify Python/PyTorch environment
+
+Step 3:
+- Run data preparation
+
+Step 4:
+- Run debug_cpu experiment
+
+Step 5:
+- Log start time, end time, device, and outputs in LAB_LOG.md
+
+Step 6:
+- If debug_cpu succeeds, run baseline_cpu
+
+Step 7:
+- Evaluate baseline checkpoint
+
+Step 8:
+- Run and evaluate ablations one by one
+
+Step 9:
+- Generate figures from the best checkpoint
+
+Step 10:
+- Build final result tables and write whitepaper
+
+Important lab principle:
+- Only one major variable should change between ablations
+
+=====================================================================
+14. WHAT CAN ALREADY BE CLAIMED SAFELY
+=====================================================================
+
+The following claims are currently safe and supportable:
+
+- The repository now includes reproducible data preparation
+- The repository now correctly parses Flickr8k captions
+- The repository now generates train/val/test artifacts from source data
+- The model architecture is CNN-LSTM using InceptionV3 + LSTM
+- The training code includes scheduled sampling, label smoothing, gradient clipping, and checkpointing
+- The evaluation code supports BLEU with 5 reference captions per test image
+- A professional lab protocol has been defined for controlled experiments
+
+=====================================================================
+15. WHAT MUST NOT BE CLAIMED YET
+=====================================================================
+
+The following claims should NOT be made yet unless confirmed by completed runs:
+
+- final BLEU scores
+- superiority of one training strategy over another
+- actual benefits of fine-tuning on this machine
+- final qualitative quality of the model
+- complete success of end-to-end training under the revised protocol
+
+Reason:
+- these require measured evidence that has not yet been fully collected
+
+=====================================================================
+16. FINAL GOAL
+=====================================================================
+
+The final goal is not only to have a working repository, but to produce:
+
+- a correct implementation
+- a documented experimental campaign
+- quantitative results
+- qualitative examples
+- a professional whitepaper/report
+- a project that is understandable even to readers who do not program
+
+This project is now in the transition phase between:
+- code correction and infrastructure setup
+and
+- controlled experimentation and final academic delivery
+
+=====================================================================
+17. IMMEDIATE NEXT STEP
+=====================================================================
+
+The immediate next step is:
+- run the first controlled experiment: debug_cpu
+
+This is the first real experiment under the new rigid laboratory protocol.
+

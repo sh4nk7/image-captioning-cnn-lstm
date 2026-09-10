@@ -1,0 +1,155 @@
+Brand
+Guidelines
+           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+           incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+           exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+IDENTITÀ
+         1. Design
+            -Logo
+            -Colori
+            -Typography
+            -Look&Feel
+
+         2. Lines
+
+         3. Website
+INDICE
+       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+       eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+       enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+
+
+
+
+Logo
+       ut aliquip ex ea commodo consequat.
+       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+       eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+       enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+       ut aliquip ex ea commodo consequat.
+       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+       eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+       enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+       ut aliquip ex ea commodo consequat.
+LOGO - POSITIVO
+LOGO - NEGATIVO
+LOGO – RAPPORTO TRASPARENZA
+
+                              100%   90%   80%   70%                     60%
+
+
+
+
+                              50%    40%   30%   20%                     10%
+
+
+
+
+                                                 Su una base nera cona
+                                                 una trasparenza del
+                                                 20% il logo funziona
+                                                 meglio al positivo
+MONOGRAMMA ED ESPLOSO
+CLEARSPACE
+CLEARSPACE
+UTILIZZO SBAGLIATO
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+        enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+
+
+
+
+Color
+        ut aliquip ex ea commodo consequat.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+        enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+        ut aliquip ex ea commodo consequat.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+        enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+        ut aliquip ex ea commodo consequat.
+                Lorem ipsum dolor sit
+                amet, consectetur         Bianco             Black               Blu
+                adipiscing elit, sed do
+                eiusmod tempor            #EEECEE            #1D1D1B             #053EFF
+                incididunt ut labore et   RGB: 238.236.238   RGB: 29.30.27       RGB: 5.62.255
+                dolore magna aliqua.      CYMK: 7.7.6.0      CYMK: 74.64.63.81   CYMK: 90.70.0.0
+                Ut enim ad minim
+                veniam, quis nostrud
+                exercitation ullamco
+                laboris nisi ut aliquip
+                ex ea commodo
+                consequat.
+PRIMARY COLOR
+                  Fucsia            Rosso              Arancio            Azzurro           Verde Acqua       Verde              Lime
+
+                  #FF0F82           #FF2800            #FF780F            #19CDFF           #00E691           #19D710            #B9E119
+                  RGB: 255.15.130   RGB: 255.40.0      RGB: 255.120.15    RGB: 25.205.255   RGB: 0.230.145    RGB: 25.215.25     RGB: 185.225.25
+                  CYMK: 0.97.0.0    CYMK: 0.97.100.0   CYMK: 0.67.100.0   CYMK: 71.0.2.0    CYMK: 77.0.69.0   CYMK: 81.0.100.0   CYMK: 43.0.100.0
+SECONDARY COLOR
+                    USO    USO    USO
+                    DEL    DEL    DEL
+PRIMARY COLOR USE
+
+
+
+
+                    COLORE COLORE COLORE
+                      USO    USO    USO
+SECONDARY COLOR USE
+
+
+
+
+                      DEL    DEL    DEL
+                      COLORE COLORE COLORE
+             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+             enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+
+
+
+
+Typography
+             ut aliquip ex ea commodo consequat.
+             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+             enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+             ut aliquip ex ea commodo consequat.
+             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+             enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+             ut aliquip ex ea commodo consequat.
+TYPE
+TYPE
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+
+
+
+
+Look & Feel
+              ut aliquip ex ea commodo consequat.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+              ut aliquip ex ea commodo consequat.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+              ut aliquip ex ea commodo consequat.
+ICONS
+LOOK & FEEL
+LOOK & FEEL
+LOOK & FEEL
+LOOK & FEEL
+SOCIAL
+ASSET
+ASSET
+ASSET
+ASSET
+ASSET
+
